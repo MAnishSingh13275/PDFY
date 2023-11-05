@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 const FileUpload = () => {
   const [uploading, setUploading] = useState(false);
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async ({
       file_key,
       file_name,
@@ -17,7 +17,10 @@ const FileUpload = () => {
       file_key: string;
       file_name: string;
     }) => {
-      const res = await axios.post("/api/create-chat", { file_key, file_name });
+      const res = await axios.post("/api/create-chat", {
+        file_key,
+        file_name,
+      });
       return res.data;
     },
   });
@@ -41,7 +44,8 @@ const FileUpload = () => {
         }
         mutate(data, {
           onSuccess: (data) => {
-            toast.success("File uploaded successfully");
+            console.log(data);
+            // toast.success("File uploaded successfully");
           },
           onError: (error) => {
             console.log(error);
@@ -65,10 +69,12 @@ const FileUpload = () => {
         })}
       >
         <input {...getInputProps()} />
-        {uploading || isPending ? (
+        {uploading ? (
           <>
-          <Loader2 size={34} className="mx-auto animate-spin text-teal-400" />
-          <p className="text-center font-bold mx-auto text-gray-400">PDFying...</p>
+            <Loader2 size={34} className="mx-auto animate-spin text-teal-400" />
+            <p className="text-center font-bold mx-auto text-gray-400">
+              PDFying...
+            </p>
           </>
         ) : (
           <>
