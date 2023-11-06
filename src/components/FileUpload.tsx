@@ -3,11 +3,13 @@ import { uploadToS3 } from "@/lib/s3";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Inbox, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
 
 const FileUpload = () => {
+  const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const { mutate } = useMutation({
     mutationFn: async ({
@@ -43,9 +45,9 @@ const FileUpload = () => {
           return;
         }
         mutate(data, {
-          onSuccess: (data) => {
-            console.log(data);
-            // toast.success("File uploaded successfully");
+          onSuccess: ({ chat_id }) => {
+            toast.success("PDFyed!");
+            router.push(`/chat/${chat_id}`);
           },
           onError: (error) => {
             console.log(error);
