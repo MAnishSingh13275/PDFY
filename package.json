@@ -15,6 +15,8 @@
     "@pinecone-database/doc-splitter": "^0.0.1",
     "@pinecone-database/pinecone": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
     "@tanstack/react-query": "^5.7.0",
     "@types/md5": "^2.3.4",
     "aws-sdk": "^2.1488.0",
@@ -29,6 +31,7 @@
     "next": "14.0.1",
     "openai-edge": "^1.2.2",
     "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.10.111",
     "pg": "^8.11.3",
     "react": "^18",
     "react-dom": "^18",
@@ -46,6 +49,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
     "postcss": "^8",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

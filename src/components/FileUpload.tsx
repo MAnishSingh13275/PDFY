@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const FileUpload = () => {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async ({
       file_key,
       file_name,
@@ -41,7 +41,7 @@ const FileUpload = () => {
         setUploading(true);
         const data = await uploadToS3(file);
         if (!data?.file_key || !data?.file_name) {
-          toast.error("Something went wrong");
+          toast.error("Something went wrong uploading file");
           return;
         }
         mutate(data, {
@@ -51,7 +51,7 @@ const FileUpload = () => {
           },
           onError: (error) => {
             console.log(error);
-            toast.error("Something went wrong");
+            toast.error("Something went wrong creating chat");
           },
         });
       } catch (error) {
@@ -71,7 +71,7 @@ const FileUpload = () => {
         })}
       >
         <input {...getInputProps()} />
-        {uploading ? (
+        {uploading || isPending ? (
           <>
             <Loader2 size={34} className="mx-auto animate-spin text-teal-400" />
             <p className="text-center font-bold mx-auto text-gray-400">
