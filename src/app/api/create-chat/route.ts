@@ -19,6 +19,7 @@ export async function POST(req: Request, res: Response) {
     const { file_key, file_name } = body;
     console.log(file_key, file_name);
     await loadS3IntoPinecone(file_key);
+
     const chat_id = await db
       .insert(chats)
       .values({

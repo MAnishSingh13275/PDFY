@@ -16,6 +16,7 @@ export const getPineconeClient = () => {
   });
 };
 
+
 type PDFPage = {
   pageContent: string;
   metadata: {
@@ -36,17 +37,21 @@ export async function loadS3IntoPinecone(fileKey: string) {
 
   // 2. split and segment the pdf
   const documents = await Promise.all(pages.map(prepareDocument));
+  console.log("documents", documents);
 
   // 3. vectorise and embed individual documents
   const vectors = await Promise.all(documents.flat().map(embedDocument));
 
+  console.log("vectors", vectors);
+
   // 4. upload to pinecone
   const client = await getPineconeClient();
-  const pineconeIndex = client.index("chatpdf");
-  const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
+  const pineconeIndex = client.index("pdfy");
+  await pineconeIndex.upsert(vectors);
+  // const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
   console.log("inserting vectors into pinecone");
-  await namespace.upsert(vectors);
+  // await namespace.upsert(vectors);
 
   return documents[0];
 }
