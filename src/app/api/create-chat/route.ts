@@ -19,7 +19,6 @@ export async function POST(req: Request, res: Response) {
     const { file_key, file_name } = body;
     console.log(file_key, file_name);
     await loadS3IntoPinecone(file_key);
-
     const chat_id = await db
       .insert(chats)
       .values({
@@ -33,7 +32,7 @@ export async function POST(req: Request, res: Response) {
       });
 
     return NextResponse.json(
-      { chats_id: chat_id[0].insertId },
+      { chat_id: chat_id[0].insertId },
       { status: 200 }
     );
   } catch (error) {
