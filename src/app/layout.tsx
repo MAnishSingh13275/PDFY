@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <Providers>
-        <html lang="en">
-          <body className={inter.className}>{children}</body>
-          <Toaster />
+        <html lang="en" suppressHydrationWarning={true}>
+          <body className={inter.className}>
+            {children}
+            <Toaster />
+          </body>
         </html>
       </Providers>
     </ClerkProvider>
