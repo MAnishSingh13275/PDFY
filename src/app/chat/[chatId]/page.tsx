@@ -37,7 +37,7 @@ const page = async ({ params: { chatId } }: Props) => {
           <PDFViewer pdf_url={currentChat?.pdfUrl || ""} />
         </div>
 
-        <div className="flex-[3] border-l-4 border-slate-300 "> </div>
+        <div className="flex-[3] border-l-4 border-slate-300 "> Chats </div>
       </div>
     </div>
   );
