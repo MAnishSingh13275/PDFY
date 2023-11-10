@@ -9,7 +9,7 @@ type Props = {
 const MessageList = ({ messages }: Props) => {
   if (!messages) return <></>;
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {messages.map((message) => {
         return (
           <div
