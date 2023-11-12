@@ -12,7 +12,6 @@ export async function getMatchesFromEmbeddings(
       apiKey: process.env.PINECONE_API_KEY!,
     });
     const pineconeIndex = await client.index("pdfy");
-    // const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
     const queryResult = await pineconeIndex.query({
       topK: 5,
       vector: embeddings,

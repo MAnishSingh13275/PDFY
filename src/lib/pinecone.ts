@@ -16,7 +16,6 @@ export const getPineconeClient = () => {
   });
 };
 
-
 type PDFPage = {
   pageContent: string;
   metadata: {
@@ -48,10 +47,8 @@ export async function loadS3IntoPinecone(fileKey: string) {
   const client = await getPineconeClient();
   const pineconeIndex = client.index("pdfy");
   await pineconeIndex.upsert(vectors);
-  // const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
   console.log("inserting vectors into pinecone");
-  // await namespace.upsert(vectors);
 
   return documents[0];
 }
