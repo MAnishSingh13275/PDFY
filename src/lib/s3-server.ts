@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
-import  fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 export async function downloadFromS3(file_key: string) {
   try {
     AWS.config.update({
@@ -13,7 +13,7 @@ export async function downloadFromS3(file_key: string) {
         Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME,
       },
       region: "ap-south-1",
-    }); 
+    });
     const params = {
       Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME!,
       Key: file_key,
@@ -24,11 +24,7 @@ export async function downloadFromS3(file_key: string) {
     fs.mkdirSync(dirPath, { recursive: true });
     fs.writeFileSync(file_name, obj.Body as Buffer);
     return file_name;
-    
-  } 
-  
-  catch (error) {
+  } catch (error) {
     console.log(error, "error in downloadFromS3");
- 
   }
 }
