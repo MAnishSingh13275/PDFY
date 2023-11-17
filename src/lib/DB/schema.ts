@@ -19,7 +19,7 @@ export const chats = pgTable("chats", {
   fileKey: text("fileKey").notNull(),
 });
 
-export type DrizzleChat = typeof chats.$inferSelect
+export type DrizzleChat = typeof chats.$inferSelect;
 
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
@@ -29,4 +29,16 @@ export const messages = pgTable("messages", {
   content: text("content").notNull(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   role: userSystemEnum("role").notNull(),
+});
+
+export const userSubscriptions = pgTable("user_subscriptions", {
+  id: serial("id").primaryKey(),
+  userId: varchar("userId", { length: 256 }).notNull(),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 256 })
+    .notNull()
+    .unique(),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 256 })
+    .unique(),
+  stripePriceId: varchar("stripePriceId", { length: 256 }),
+  stripeCurrentPeriodEnd: timestamp("stripeCurrentPeriodEnd"),
 });
