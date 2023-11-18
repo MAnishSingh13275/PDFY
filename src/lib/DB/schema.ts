@@ -33,12 +33,13 @@ export const messages = pgTable("messages", {
 
 export const userSubscriptions = pgTable("user_subscriptions", {
   id: serial("id").primaryKey(),
-  userId: varchar("userId", { length: 256 }).notNull(),
-  stripeCustomerId: varchar("stripeCustomerId", { length: 256 })
+  userId: varchar("user_id", { length: 256 }).notNull().unique(),
+  stripeCustomerId: varchar("stripe_customer_id", { length: 256 })
     .notNull()
     .unique(),
-  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 256 })
-    .unique(),
-  stripePriceId: varchar("stripePriceId", { length: 256 }),
-  stripeCurrentPeriodEnd: timestamp("stripeCurrentPeriodEnd"),
+  stripeSubscriptionId: varchar("stripe_subscription_id", {
+    length: 256,
+  }).unique(),
+  stripePriceId: varchar("stripe_price_id", { length: 256 }),
+  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end"),
 });
